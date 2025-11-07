@@ -1,0 +1,849 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Fuente y colores básicos */
+body {
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+  color: #333;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("imagenes/Fondo.jpg") no-repeat center center fixed;
+  background-size: cover;
+  opacity: 0.2;
+  z-index: -1;
+}
+
+/* Menú de navegación */
+.navbar {
+  background-color: #2f50a8;
+  color: #cccccc;
+  padding: 10px 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar-container {
+  width: 90%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.5em;
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+}
+
+.nav-links li {
+  margin-left: 20px;
+}
+
+.nav-links a {
+  font-size: 19px;
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 12px;
+  transition: background 0.3s, color 0.3s;
+  white-space: nowrap;
+}
+
+.nav-links a:hover {
+  background-color: #ea1b21;
+  color: #fff;
+  border-radius: 4px;
+}
+
+/* Banner */
+.banner {
+  color: #2f50a8;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.banner img {
+  width: 30%;
+  height: auto;
+  border-radius: 20px;
+  border: 3px solid #3b3c3d;
+  padding: 5px;
+}
+
+/* --- Carrusel del banner --- */
+.carousel-container {
+  position: relative;
+  max-width: 900px;
+  width: 100%;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease;
+  touch-action: pan-y;
+}
+
+.carousel-track img {
+  width: calc(100% / 3 - 10px);
+  height: auto;
+  object-fit: cover;
+  margin-right: 10px;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+/* --- Botones del carrusel (base) --- */
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(47, 80, 168, 0.8);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 10;
+  border-radius: 8px;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.carousel-btn:hover {
+  background: #ea1b21;
+  transform: translateY(-50%) scale(1.05);
+}
+
+.carousel-btn.prev { left: 10px; }
+.carousel-btn.next { right: 10px; }
+
+/* --- En PC: botones fuera del carrusel --- */
+@media (min-width: 1024px) {
+  .carousel-container {
+    overflow: visible;
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .carousel-btn.prev { left: -80px; }
+  .carousel-btn.next { right: -80px; }
+}
+
+/* --- Tabletas (768px - 1023px): botones transparentes --- */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .carousel-btn {
+    background-color: transparent !important;
+    border: 2px solid white !important;
+    color: white !important;
+    border-radius: 5px !important;
+    transition: none !important;
+  }
+  .carousel-btn:hover {
+    background-color: transparent !important;
+    color: white !important;
+    transform: translateY(-50%) !important;
+  }
+}
+
+/* --- Celulares (max-width: 480px) --- */
+@media (max-width: 480px) {
+  .carousel-track img {
+    flex: 0 0 100%;
+    width: 100%;
+    border-radius: 20px;
+    margin-right: 0;
+  }
+
+  .carousel-btn {
+    background-color: transparent !important;
+    border: 2px solid white !important;
+    color: white !important;
+    border-radius: 5px !important;
+    transition: none !important;
+  }
+
+  .carousel-btn:hover {
+    background-color: transparent !important;
+    color: white !important;
+    transform: translateY(-50%) !important;
+  }
+}
+
+/* --- Sección sobre la empresa --- */
+.about {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 40px 90px;
+  background-color: #f9f9f9;
+  scroll-margin-top: 80px;
+  height: 350px;
+  overflow: auto;
+}
+
+.about-image img {
+  width: 100%;
+  max-width: 350px;
+  border-radius: 8px;
+}
+
+.about-content {
+  margin-left: 40px;
+}
+
+.about-content h2 {
+  margin-bottom: 20px;
+  color: #2f50a8;
+}
+
+/* --- Imagen más grande en tabletas (versión mejorada) --- */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .about {
+    flex-direction: column;           /* apila los elementos verticalmente */
+    height: auto;                     /* permite crecer con el contenido */
+    text-align: center;
+    padding: 40px 40px;
+  }
+
+  .about-image img {
+    max-width: 600px !important;      /* 🔹 imagen más grande */
+    width: 80% !important;
+    height: auto;
+  }
+
+  .about-content {
+    margin-left: 0;
+    margin-top: 20px;
+  }
+}
+
+/* Sección de servicios / proyectos */
+.services {
+    padding: 40px 90px;
+    scroll-margin-top: 60px;
+}
+
+.services h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #ea1b21;
+}
+
+.services-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas */
+    gap: 30px;
+    justify-content: center;   /* centra filas incompletas */
+    justify-items: center;     /* centra cada recuadro dentro de su celda */
+    max-width: 1200px;         /* ancho máximo del grid */
+    margin: 0 auto;            /* centra el grid en la página */
+    padding: 40px 20px;        /* espaciado interno */
+}
+
+.service-item {
+    background-color: #f1f1f1;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    min-height: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.service-item img {
+    max-width: 100%;   
+    height: auto;      
+    border-radius: 6px; 
+    margin-bottom: 10px; 
+}
+
+.service-item:hover {
+    transform: scale(1.05);
+}
+
+.service-item h3 {
+    margin-bottom: 10px;
+    color: #ea1b21;
+}
+
+.service-item p {
+    margin-bottom: 10px;
+}
+
+h2, h3 {
+  margin-bottom: 10px;
+}
+
+.service-links {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.service-links a {
+  font-size: 24px;
+  color: #1a3170;
+  transition: transform 0.3s, color 0.3s;
+}
+
+.service-links a:hover {
+  color: #ea1b21;
+  transform: scale(1.2);
+}
+
+p {
+  margin-top: 5px;
+}
+/* Pie de página */
+.footer {
+    background-color: #2f50a8;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.footer-container {
+    width: 90%;
+    margin: auto;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.social-links a {
+  font-size: 28px;
+  color: #ffffff;
+  transition: transform 0.3s, color 0.3s;
+}
+
+.social-links a:hover {
+  color: #ea1b21;
+  transform: scale(1.2);
+}
+
+.footer p {
+    margin-top: 10px;
+    font-size: 0.9em;
+}
+
+.contact {
+    padding: 40px 90px;
+    background-color: #ea1b21;
+    text-align: center;
+}
+
+.contact-form {
+    max-width: 500px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    color: #fff !important;
+}
+
+.contact-form h2 {
+    color: #fff !important;
+}
+
+.contact-form label {
+    text-align: left;
+    font-weight: bold;
+    color: #fff; 
+}
+
+.contact-form input,
+.contact-form textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1em;
+    width: 100%;
+}
+
+.contact-form button {
+    background-color: #2f50a8;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.contact-form button:hover {
+    background-color: #1a3170;
+}
+
+.whatsapp-contact {
+  display: flex;
+  align-items: center;    
+  justify-content: center; 
+  gap: 10px;
+  margin: 20px auto;
+  font-size: 18px;
+}
+
+.whatsapp-contact i {
+  font-size: 24px;
+  line-height: 1;
+}
+
+.whatsapp-contact p {
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+}
+
+/* ----------- Responsive Design ----------- */
+@media (max-width: 768px) {
+    .navbar-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-links {
+        list-style: none;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        white-space: nowrap;
+        overflow-x: auto;
+    }
+
+    .nav-links li {
+        margin: 0 8px;
+    }
+
+    .nav-links a {
+        font-size: 0.9em;
+        padding: 6px 10px;
+    }
+
+    .banner {
+        height: auto;
+        padding: 20px;
+    }
+
+    .banner img {
+        width: 80%;
+    }
+
+    .about {
+        flex-direction: column;
+        padding: 20px;
+        text-align: center;
+        height: auto;
+    }
+
+    .about-image {
+        margin-bottom: 20px;
+    }
+
+    .about-content {
+        margin-left: 0;
+    }
+
+    .footer p {
+        font-size: 0.8em;
+    }
+}
+
+/* ----------- Responsive extra pequeño (celulares muy pequeños) ----------- */
+@media (max-width: 500px) {
+    .navbar {
+        height: auto;
+        padding: 15px;
+    }
+
+    .logo {
+        font-size: 1.2em;
+    }
+
+    .banner h1 {
+        font-size: 2em;
+    }
+
+    .banner p {
+        font-size: 1em;
+    }
+
+    .about-content p {
+        font-size: 0.9em;
+    }
+}
+
+/* --- Ajustes personalizados para Proyectos --- */
+
+/* Base: móviles (2 recuadros por fila) */
+.services-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  justify-content: center;
+  justify-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+/* En celulares: si queda un recuadro solo, alinear a la izquierda */
+@media (max-width: 768px) {
+  .services-container .service-item:last-child:nth-child(odd) {
+    grid-column: 1 / 2;   /* lo ubica en la primera columna */
+    justify-self: start;  /* lo alinea a la izquierda */
+  }
+}
+
+/* PC y Tablet: 3 columnas centradas */
+@media (min-width: 768px) {
+  .services-container {
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* Si el último queda solo, que ocupe el centro */
+  .services-container .service-item:last-child:nth-child(3n+1) {
+    grid-column: 2; /* coloca el último en la columna central */
+  }
+}
+
+/* --- ESTILO GENERAL DEL MENÚ --- */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background-color: #2f50a8; /* puedes cambiarlo */
+  color: white;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.nav-links li a:hover {
+  color: rgb(255, 255, 255);
+}
+
+/* --- BOTÓN HAMBURGUESA --- */
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
+  
+  .nav-links {
+    display: none; /* ocultar menú por defecto */
+    flex-direction: column;
+    background-color: #2f50a8;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    border-radius: 8px;
+    padding: 10px;
+  }
+
+  .nav-links.active {
+    display: flex; /* mostrar menú al hacer clic */
+  }
+
+  .nav-links li {
+    margin: 10px 0;
+  }
+}
+
+/* --- Ajuste de posición del botón hamburguesa --- */
+.navbar-container {
+  display: flex;
+  justify-content: space-between; /* logo izquierda, hamburguesa derecha */
+  align-items: center;
+  width: 90%;
+  margin: auto;
+}
+
+
+/* En pantallas pequeñas: el menú se esconde y el botón se mantiene a la derecha */
+@media (max-width: 768px) {
+  .navbar-container {
+    flex-direction: row; /* 🔹 evita que se ponga en columna */
+  }
+
+  .hamburger {
+    display: block;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+    margin-left: auto; /* 🔹 empuja el botón a la derecha */
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background-color: #2f50a8;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    border-radius: 8px;
+    padding: 10px;
+    z-index: 999;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+}
+
+/* --- CARRUSEL DEL BANNER --- */
+.carousel-container {
+  position: relative;
+  max-width: 900px;
+  width: 100%;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+.carousel {
+  overflow: hidden;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease;
+  touch-action: pan-y;
+}
+
+.carousel-track img {
+  width: calc(100% / 3 - 10px); /* 3 visibles en PC */
+  height: auto;
+  object-fit: cover;
+  margin-right: 10px;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  background: rgba(0, 0, 0, 0.3);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 1;
+  border-radius: 50%;
+}
+
+.carousel-btn.prev {
+  left: 10px;
+}
+
+.carousel-btn.next {
+  right: 10px;
+}
+
+
+/* --- RESPONSIVE --- */
+/* Ajuste del tamaño del carrusel en PC */
+@media (min-width: 1024px) {
+  .banner {
+    width: 90%; /* 🔹 Ocupa el 80% del ancho de la página */
+    margin: 0 auto; /* Centrado horizontal */
+  }
+
+  .carousel-container {
+    max-width: 100%;
+  }
+
+  .carousel-slide img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+/* --- Botones del carrusel (rectangulares y consistentes en todas las versiones) --- */
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(47, 80, 168, 0.8); /* 🔹 color acorde al tema */
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 10;
+  border-radius: 8px; /* 🔹 esquinas ligeramente redondeadas */
+  transition: background 0.3s, transform 0.3s;
+}
+
+.carousel-btn:hover {
+  background: #ea1b21; /* 🔹 rojo al pasar el mouse */
+  transform: translateY(-50%) scale(1.05);
+}
+
+/* Posición base (celular y tablet): botones dentro del carrusel */
+.carousel-btn.prev {
+  left: 10px;
+}
+
+.carousel-btn.next {
+  right: 10px;
+}
+
+/* --- En PC: botones fuera del carrusel --- */
+@media (min-width: 1024px) {
+  .carousel-container {
+    overflow: visible; /* 🔹 permite que los botones sobresalgan */
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .carousel-btn.prev {
+    left: -80px; /* 🔹 hacia afuera */
+  }
+
+  .carousel-btn.next {
+    right: -80px;
+  }
+}
+
+/* Carrusel para celulares (max-width: 480px) */
+@media (max-width: 480px) {
+  .carousel-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .carousel-track img {
+    flex: 0 0 100%; /* una imagen a la vez */
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    margin-right: 0;
+    opacity: 0.9;
+  }
+
+  /* Botones transparentes, rectangulares y sin animación */
+.carousel-btn {
+    display: block;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    background-color: transparent; /* transparente */
+    color: white;
+    border: 2px solid white; /* borde visible */
+    padding: 10px 20px;
+    cursor: pointer;
+    z-index: 10;
+    border-radius: 5px; /* rectangular */
+    transition: none !important; /* 🔹 elimina cualquier animación */
+}
+
+.carousel-btn:hover {
+    background-color: transparent !important;
+    color: white !important;
+    transform: translateY(-50%) !important; /* 🔹 asegura que no se mueva */
+}
+
+/* --- Carrusel centrado en móviles (versión corregida) --- */
+@media (max-width: 768px) {
+  .banner-carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    justify-content: center;
+    align-items: center;
+    width: 100vw; /* 🔹 fuerza que el carrusel use todo el ancho de la pantalla */
+    margin: 0 auto;
+  }
+
+  .banner-slide {
+    flex: 0 0 100%; /* 🔹 cada slide ocupa el 100% del ancho del viewport */
+    display: flex;
+    justify-content: center; /* 🔹 centra el contenido dentro del slide */
+    align-items: center;
+    scroll-snap-align: center;
+  }
+
+  .banner-slide img {
+    width: 80%;  /* ajusta el tamaño visible */
+    height: auto;
+    opacity: 0.9;
+    border-radius: 20px;
+    display: block;
+    margin: 0 auto; /* 🔹 asegura centrado total */
+  }
+}
