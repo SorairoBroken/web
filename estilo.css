@@ -81,7 +81,7 @@ body::before {
 /* Banner */
 .banner {
   color: #2f50a8;
-  height: 500px;
+  height: 450px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -212,7 +212,7 @@ body::before {
 
 .about-image img {
   width: 100%;
-  max-width: 350px;
+  max-width: 400px;
   border-radius: 8px;
 }
 
